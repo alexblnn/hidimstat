@@ -43,13 +43,13 @@ import matplotlib.pyplot as plt
 
 n_subjects = 500
 n_clusters = 500
-rho = 0.8
+rho = 0.7
 sparsity = 0.1
 fdr = 0.1
-seed = 42
+seed = 44
 n_bootstraps = 25
 n_jobs = 25
-runs = 10
+runs = 20
 
 rng = check_random_state(seed)
 seed_list = rng.randint(1, np.iinfo(np.int32).max, runs)
@@ -64,7 +64,7 @@ def single_run(n_subjects, n_clusters, rho, sparsity, fdr, n_bootstraps, n_jobs,
     fdp_mx, power_mx = cal_fdp_power(mx_selection, non_zero_index)
 
     # Use aggregated Knockoffs [2]
-    aggregated_ko_selection = knockoff_aggregation(X, y, fdr=fdr, n_bootstraps=n_bootstraps, n_jobs=n_jobs, random_state=seed)
+    aggregated_ko_selection = knockoff_aggregation(X, y, fdr=fdr, n_bootstraps=n_bootstraps, n_jobs=n_jobs, gamma=0.3, random_state=seed)
 
     fdp_agg, power_agg = cal_fdp_power(aggregated_ko_selection, non_zero_index)
 
