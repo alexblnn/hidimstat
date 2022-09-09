@@ -43,13 +43,13 @@ import matplotlib.pyplot as plt
 
 n_subjects = 500
 n_clusters = 500
-rho = 0.7
+rho = 0.8
 sparsity = 0.1
 fdr = 0.1
 seed = 42
 n_bootstraps = 25
 n_jobs = 25
-runs = 1
+runs = 10
 
 rng = check_random_state(seed)
 seed_list = rng.randint(1, np.iinfo(np.int32).max, runs)
@@ -85,8 +85,9 @@ for seed in seed_list:
 
 # Plot FDP and Power distributions
 
-fdps = np.array([fdps_mx, fdps_agg])
-powers = np.array([powers_mx, powers_agg])
+fdps = [fdps_mx, fdps_agg]
+powers =  [powers_mx, powers_agg]
+
 
 def plot_results(bounds, fdr, nsubjects, n_clusters, rho, power=False):
     plt.figure()
